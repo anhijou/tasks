@@ -1,0 +1,77 @@
+<div class="row my-4">
+    <div class="col-md-6">
+        <h3>List of Tasks</h3>
+    </div>
+    <div class="col-md-6 text-end">
+
+        <button (click)="showForm=!showForm" class="btn btn-dark btn-sm">
+            <i class="fa fa-plus"></i>New task
+        </button>
+    </div>
+</div>
+
+<div class="row" *ngIf="showForm">
+    <div class="col-md-6 mx-auto">
+        <div class="form-group">
+            <label for="label">label</label>
+            <input [(ngModel)]="myTask.label"  id="label" type="text" class="form-control">
+        </div>
+        <div class="form-check my-2">
+          <label class="form-check-label">
+            <input [(ngModel)]="myTask.completed"   type="checkbox" class="form-check-input" >
+            Completed
+          </label>
+        </div>
+        
+        <button *ngIf="editForm" (click)="updateTask()" class="btn btn-warning w-100">
+            <i class="fa fa-refresh mx-2"></i>update
+        </button>
+        <button *ngIf="!editForm" (click)="presistTask(myTask)" class="btn btn-success w-100">
+            <i class="fa fa-paper-plane mx-2"></i>New task
+        </button>
+    </div>
+</div>
+<div class="row col-md-6 mx-auto">
+    <input (keyup)="SearchTasks()" *ngIf="!showForm" [(ngModel)]="searchText" placeholder="search..." type="text" class=" form-control">
+</div>
+
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <ul class="list-group">
+            
+        <ul class="list-group">
+            
+            <li *ngFor="let task of taskss" class="list-group-item d-flex justify-content-between align-items-center">
+                <button (click)="editTask(task)" class="btn btn-warning">
+                    <i  class="fa fa-pencil-alt" ></i>
+                </button>
+                
+                
+                {{task.label}}
+                <span  (click)="completed(task)" [ngClass]="{
+                    'bg-info': task.completed,
+                    'bg-danger':!task.completed
+                }"
+                class="badge rounded-pill bg-danger">
+                   <i  class="fa" [ngClass]="{
+                    'fa-thumbs-up': task.completed,
+                    'fa-thumbs-down': !task.completed
+                   }" aria-hidden="true"></i>
+                </span>
+
+                <button (click)="deleteTask(task.id)" class="btn btn-sm btn-small">
+                    <i class="fa fa-trash"></i>
+                </button>
+                
+            </li>
+
+            
+        </ul>
+            
+        </ul>
+    </div>
+</div>
+
+
+  

@@ -8,7 +8,7 @@ import { Task } from '../models/task';
 export class TaskService {
 
   constructor(private http:HttpClient) { }
-  private API = "http://localhost:3000/tasks";
+  private API = "https://api-server-blue.vercel.app/tasks";
   findAll(){
     return this.http.get<Task[]>(this.API);
   }
